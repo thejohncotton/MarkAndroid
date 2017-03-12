@@ -1,6 +1,7 @@
 package com.a1080people.johncotton.marktest;
 
 
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -28,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
         mark_button = (Button) findViewById(R.id.button);
         stop_button = (Button) findViewById(R.id.button2);
         timecode = (Chronometer) findViewById(R.id.chronometer2);
-        syncImage.setImageAlpha(0);
-//        syncImage.setVisibility(View.INVISIBLE);
+       // syncImage.setImageAlpha(0);
+        syncImage.setVisibility(View.INVISIBLE);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/dsdigi.TTF");
 
+        timecode.setTypeface(custom_font);
     }
 
 
@@ -40,9 +43,17 @@ public class MainActivity extends AppCompatActivity {
         timecode.start();
         cueBlipmp.start();
         isRunning = true;
-        syncImage.setImageAlpha(255);
-//        syncImage.setVisibility(View.VISIBLE);
-        syncImage.animate().alpha(0).setDuration(20);
+        syncImage.setVisibility(View.VISIBLE);
+        syncImage.postDelayed(new Runnable() {
+            public void run() {
+                syncImage.setVisibility(View.INVISIBLE);
+            }
+        }, 100);
+     //  syncImage.setVisibility(View.VISIBLE);
+//        syncImage.animate().alpha(255).setDuration(20);
+     //   syncImage.setImageAlpha(255);
+      //  syncImage.animate().alpha(255);
+        //syncImage.setVisibility(View.VISIBLE);
 
 
 //        Toast.makeText(getApplicationContext(), "MARK SHOT", Toast.LENGTH_SHORT).show();
